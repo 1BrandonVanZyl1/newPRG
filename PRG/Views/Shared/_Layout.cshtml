@@ -2,27 +2,6 @@
 <html>
 
 <head>
-
-    <title> BizWheel</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/style.css")
-    @Styles.Render("~/css/animate.min.css")
-    @Styles.Render("~/css/bootstrap.min.css")
-    @Styles.Render("~/cubeportfolio.min.css")
-    @Styles.Render("~/font-awesome.css")
-    @Styles.Render("~/jquery.fancybox.min.css")
-    @Styles.Render("~/magnific-popup.min.css")
-    @Styles.Render("~/owl-carousel.min.css")
-    @Styles.Render("~/slicknav.min.css")
-    @Styles.Render("~/css/skins/skin-1.css")
-    @Styles.Render("~/css/skins/skin-2.css")
-    @Styles.Render("~/css/skins/skin-3.css")
-    @Styles.Render("~/css/skins/skin-4.css")
-
-    @Styles.Render("~/css/reset.css")
-    @Styles.Render("~/css/responsive.css")
-    <!-- Meta Tag -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name='copyright' content='pavilan'>
@@ -39,29 +18,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Bizwheel Plugins CSS -->
-    <link rel="stylesheet" href="css/animate.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/cubeportfolio.min.css">
-    <link rel="stylesheet" href="css/font-awesome.css">
-    <link rel="stylesheet" href="css/jquery.fancybox.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.min.css">
-    <link rel="stylesheet" href="css/owl-carousel.min.css">
-    <link rel="stylesheet" href="css/slicknav.min.css">
+    <link rel="stylesheet" href="~/css/animate.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/cubeportfolio.min.css">
+    <link rel="stylesheet" href="~/css/font-awesome.css">
+    <link rel="stylesheet" href="~/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="~/css/magnific-popup.min.css">
+    <link rel="stylesheet" href="~/css/owl-carousel.min.css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css">
 
     <!-- Bizwheel Stylesheet -->
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-
-    <!-- Bizwheel Colors -->
-    <!--<link rel="stylesheet" href="css/skins/skin-1.css">
-    <!--<link rel="stylesheet" href="css/skins/skin-2.css">-->
-    <!--<link rel="stylesheet" href="css/skins/skin-3.css">-->
-    <!--<link rel="stylesheet" href="css/skins/skin-4.css">-->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="~/css/reset.css">
+    <link rel="stylesheet" href="~/style.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
 
 </head>
 <!-- Header -->
@@ -89,8 +58,24 @@
                             <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
                         </ul>
                         <div class="button">
-                            <div class="bizwheel-btn"> @Html.Partial("_LoginPartial")</div>
+                            <div>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <form action="/Account/Login" method="get">
+                                        <button class="bizwheel-btn">Log In</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    using (Html.BeginForm("Logoff", "Account", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <button class="bizwheel-btn"> Log Off </button>
+                                    }
+                                }
+                            </div>
                         </div>
+                      
                     </div>
                 </div>
             </div>
@@ -213,7 +198,7 @@
 
 
 <body>
-    
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -334,24 +319,33 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-    @Scripts.Render("~/js/jquery.min.js")
-    @Scripts.Render("~/js/jquery-migrate-3.0.0.js")
-    @Scripts.Render("~/js/popper.min.js")
-    @Scripts.Render("~/js/bootstrap.min.js")
-    @Scripts.Render("~/js/modernizr.min.js")
-    @Scripts.Render("~/js/scrollup.js")
-    @Scripts.Render("~/js/jquery-fancybox.min.js")
-    @Scripts.Render("~/js/cubeportfolio.min.js")
-    @Scripts.Render("~/js/slicknav.min.js")
-    @Scripts.Render("~/js/owl-carousel.min.js")
-    @Scripts.Render("~/js/easing.js")
-    @Scripts.Render("~/js/magnific-popup.min.js")
-    @Scripts.Render("~/js/active.js")
+    <!-- Jquery JS -->
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/jquery-migrate-3.0.0.js"></script>
+    <!-- Popper JS -->
+    <script src="~/js/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- Modernizr JS -->
+    <script src="~/js/modernizr.min.js"></script>
+    <!-- ScrollUp JS -->
+    <script src="~/js/scrollup.js"></script>
+    <!-- FacnyBox JS -->
+    <script src="~/js/jquery-fancybox.min.js"></script>
+    <!-- Cube Portfolio JS -->
+    <script src="~/js/cubeportfolio.min.js"></script>
+    <!-- Slick Nav JS -->
+    <script src="~/js/slicknav.min.js"></script>
+    <!-- Slick Nav JS -->
+    <script src="~/js/slicknav.min.js"></script>
+    <!-- Slick Slider JS -->
+    <script src="~/js/owl-carousel.min.js"></script>
+    <!-- Easing JS -->
+    <script src="~/js/easing.js"></script>
+    <!-- Magnipic Popup JS -->
+    <script src="~/js/magnific-popup.min.js"></script>
+    <!-- Active JS -->
+    <script src="~/js/active.js"></script>
 
 
 </body>
